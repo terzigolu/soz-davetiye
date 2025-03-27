@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yeliz & Yusuf - Söz Davetiyesi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  </head>
+  <body>
+    <div class="stars"></div>
+    <div class="card">
+      <div class="card-content">
+        <h1 class="reveal-text">Yeliz & Yusuf</h1>
+        <div class="date-badge reveal-item">
+          <h2>🗓️ 6 Nisan 2025 • 19:00</h2>
+        </div>
+        <p class="reveal-item">Sizleri de aramızda görmek isteriz.</p>
+        <a
+          href="https://calendar.google.com/calendar/event?action=TEMPLATE&text=Yeliz+ve+Yusuf+S%C3%B6z+T%C3%B6reni&dates=20250406T160000Z/20250406T200000Z&details=Yeliz+ve+Yusuf%27un+s%C3%B6z+t%C3%B6reninde+sizleri+de+aram%C4%B1zda+g%C3%B6rmek+isteriz.&location=Salon"
+          class="button reveal-item"
+          target="_blank"
+        >
+          <span class="button-icon">📆</span>
+          <span class="button-text">Takvime Ekle</span>
+        </a>
+
+        <a
+          href="https://g.co/kgs/3uefC8G"
+          class="button location-button reveal-item"
+          target="_blank"
+        >
+          <span class="button-icon">📍</span>
+          <span class="button-text">Konumu Göster</span>
+        </a>
+
+        <div class="map-preview reveal-item">
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.9258670605547!2d28.98139286567857!3d41.0467693717151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7650656bd63%3A0x8ca058b28c20b6c3!2zVGFrc2ltIE1leWRhbsSxLCBHw7xtw7zFn3N1eXUsIDM0NDM1IEJleW_En2x1L8Swc3RhbmJ1bA!5e0!3m2!1str!2str!4v1653384235654!5m2!1str!2str"
+              width="100%"
+              height="150"
+              style="border: 0; border-radius: 8px"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Yıldız arka planı animasyonu
+        const starsContainer = document.querySelector(".stars");
+        for (let i = 0; i < 100; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+          star.style.top = `${Math.random() * 100}%`;
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.animationDelay = `${Math.random() * 10}s`;
+          starsContainer.appendChild(star);
+        }
+
+        // Metin açılış animasyonları
+        anime
+          .timeline({
+            easing: "easeOutExpo",
+          })
+          .add({
+            targets: ".reveal-text",
+            opacity: [0, 1],
+            translateY: [40, 0],
+            duration: 1200,
+          })
+          .add(
+            {
+              targets: ".reveal-item",
+              opacity: [0, 1],
+              translateY: [20, 0],
+              delay: anime.stagger(200),
+              duration: 800,
+            },
+            "-=800"
+          );
+
+        // Kart hover efekti
+        document.querySelector(".card").addEventListener("mousemove", (e) => {
+          const card = e.currentTarget;
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = (y - centerY) / 20;
+          const rotateY = (centerX - x) / 20;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        document.querySelector(".card").addEventListener("mouseleave", (e) => {
+          e.currentTarget.style.transform =
+            "perspective(1000px) rotateX(0) rotateY(0)";
+        });
+      });
+    </script>
+  </body>
+</html>
