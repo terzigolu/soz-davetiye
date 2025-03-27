@@ -6,9 +6,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   color: #e5e7eb;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -39,7 +40,7 @@ body {
 .card {
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(8px);
-  padding: 2.5rem 3.5rem;
+  padding: 2.5rem 2rem;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
               inset 0 0 30px rgba(255, 255, 255, 0.05);
@@ -49,6 +50,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   max-width: 400px;
   width: 90%;
+  margin: 2rem 0;
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -104,11 +106,18 @@ p {
   margin: 1rem 0;
 }
 
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1.5rem;
   padding: 0.9rem 1.6rem;
   background: linear-gradient(135deg, #8b5cf6, #6366f1);
   color: white;
@@ -119,6 +128,7 @@ p {
   box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
   transition: all 0.3s ease;
   border: none;
+  min-width: 120px;
 }
 
 .button:hover {
@@ -139,7 +149,6 @@ p {
 .location-button {
   background: linear-gradient(135deg, #10b981, #059669);
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-  margin-left: 0.8rem;
 }
 
 .location-button:hover {
@@ -147,8 +156,27 @@ p {
   background: linear-gradient(135deg, #059669, #047857);
 }
 
+.venue-info {
+  margin: 1.5rem auto 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.venue-name {
+  font-weight: 500;
+  color: #e5e7eb;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.venue-address {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-top: 0;
+  line-height: 1.4;
+}
+
 .map-preview {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
@@ -192,23 +220,49 @@ p {
   opacity: 0;
 }
 
+/* Mobil cihazlar için düzenlemeler */
 @media (max-width: 480px) {
+  body {
+    padding: 1rem 0;
+  }
+  
   .card {
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 1.2rem;
+    margin: 1rem 0;
+    width: 85%;
   }
   
   h1 {
     font-size: 2rem;
   }
   
-  .button {
-    display: block;
-    margin: 1.2rem auto;
-    width: 100%;
-    max-width: 240px;
+  .buttons-container {
+    flex-direction: column;
+    gap: 0.8rem;
   }
   
-  .location-button {
-    margin-left: 0;
+  .button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  
+  .venue-address {
+    font-size: 0.85rem;
+  }
+  
+  .map-container iframe {
+    height: 130px;
+  }
+}
+
+/* Orta boyutlu cihazlar için düzenlemeler */
+@media (min-width: 481px) and (max-width: 767px) {
+  .card {
+    padding: 2rem 1.5rem;
+    width: 85%;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
   }
 }
